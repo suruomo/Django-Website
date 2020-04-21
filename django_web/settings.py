@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'message',
+    "users",
+    "courses",
 ]
+
+AUTH_USER_MODEL="users.UserProfile"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,7 +81,7 @@ WSGI_APPLICATION = 'django_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "testdjango",
+        'NAME': "mxonline",
         'USER': "root",
         'PASSWORD': "suruomo",
         'HOST': "127.0.0.1"
