@@ -30,7 +30,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+# 自定义用户登录
+AUTHENTICATION_BACKENDS=(
+    'users.views.CustomBackend',
+)
 # Application definition
 
 INSTALLED_APPS = [
