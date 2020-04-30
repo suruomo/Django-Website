@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "xadmin",
     "crispy_forms",
     "reversion",
+    'captcha',
 ]
 
 AUTH_USER_MODEL="users.UserProfile"
@@ -140,3 +141,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
+
+
+# 配置发送邮件
+EMAIL_HOST="smtp.163.com"
+EMAIL_PORT=25
+EMAIL_HOST_USER="suruomo1@163.com"
+EMAIL_HOST_PASSWORD="UCSYQQMYENHYTAQB"
+EMAIL_USE_TLS=False
+EMAIL_FROM="suruomo1@163.com"
