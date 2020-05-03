@@ -76,6 +76,10 @@ class RegisterView(View):
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             user_name = request.POST.get("email", "")
+            # 如果该邮箱已经被注册
+            if UserProfile.objects.filter(email=user_name):
+                 return render(request, 'register.html',{"register_form":register_form,"msg":"用户已经存在！"})
+            # 否则直接注册
             pass_word = request.POST.get("password", "")
             user_profile=UserProfile()
             user_profile.username=user_name
@@ -93,10 +97,14 @@ class RegisterView(View):
 class ActiveUserView(View):
     def get(self,request,active_code):
         all_record=EmailVerrifyRecord.objects.filter(code=active_code)
+        # 验证码存在且有效
         if all_record:
             for record in all_record:
                 email=record.email
                 user=UserProfile.objects.get(email=email)
                 user.is_active=True
                 user.save()
+        # 验证码不存在或失效
+        else:
+            return render(request, "active_fail.html")
         return render(request, "login.html")
