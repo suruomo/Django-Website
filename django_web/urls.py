@@ -16,7 +16,7 @@ Including another URLconf
 import xadmin
 from django.urls import path, include, re_path
 
-from users.views import LoginView,RegisterView,ActiveUserView
+from users.views import LoginView,RegisterView,ActiveUserView,ForgetPwdView,ModifyPwdView,ResetView
 # Template文件相关
 from django.views.generic import TemplateView
 urlpatterns = [
@@ -27,4 +27,7 @@ urlpatterns = [
     # 验证码路径
     path('captcha', include('captcha.urls')),
     re_path('active/(?P<active_code>.*)/',ActiveUserView.as_view(),name="user_active" ),
+    re_path('forget',ForgetPwdView.as_view(),name="forget_pwd" ),
+    re_path('reset/(?P<active_code>.*)/',ResetView.as_view(),name="reset_pwd" ),
+    re_path('modify_pwd',ModifyPwdView.as_view(),name="modify_pwd" ),
 ]
