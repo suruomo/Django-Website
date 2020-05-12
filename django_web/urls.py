@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
+
 import xadmin
 from django.urls import path, include, re_path
 from organization.views import OrgView
 from users.views import LoginView,RegisterView,ActiveUserView,ForgetPwdView,ModifyPwdView,ResetView
 # Template文件相关
 from django.views.generic import TemplateView
+# 处理静态文件
+from django.views.static import serve
+
+from django_web.settings import MEDIA_ROOT
 urlpatterns = [
     path(r'xadmin/', xadmin.site.urls),
     path('', TemplateView.as_view(template_name="index.html"),name="index"),
@@ -36,4 +42,7 @@ urlpatterns = [
     re_path('modify_pwd',ModifyPwdView.as_view(),name="modify_pwd" ),
     # 课程机构首页
     re_path('org_list',OrgView.as_view(),name="org_list" ),
+
+    # media信息，配置上传文件的访问处理
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 ]
